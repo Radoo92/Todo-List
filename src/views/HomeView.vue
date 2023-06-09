@@ -4,11 +4,7 @@
     <input v-model="newItemText" type="text" placeholder="Nová položka" />
     <button class="btn btn-primary" @click="addItem">Pridať</button>
     <ul>
-      <li
-        v-for="(item, index) in itemsToDisplay"
-        :key="index"
-        :class="{ deleted: item.deleted }"
-      >
+      <li v-for="(item, index) in itemsToDisplay" :key="index">
         {{ item.text }}
         <button class="btn-delete" @click="deleteItem(item)">Vymazať</button>
       </li>

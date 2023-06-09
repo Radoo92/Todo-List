@@ -2,11 +2,7 @@
   <div class="deleted">
     <h1>This is an deleted page</h1>
     <ul>
-      <li
-        v-for="(item, index) in itemsToDisplay"
-        :key="index"
-        :class="{ deleted: item.deleted }"
-      >
+      <li v-for="(item, index) in itemsToDisplay" :key="index">
         {{ item.text }}
       </li>
     </ul>
