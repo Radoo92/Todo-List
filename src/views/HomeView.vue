@@ -36,7 +36,7 @@ export default defineComponent({
     };
   },
   computed: {
-    ...mapGetters(["itemsToDisplay", "itemsToDeleted"]),
+    ...mapGetters(["itemsToDisplay"]),
   },
   methods: {
     addItem() {

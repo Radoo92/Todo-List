@@ -16,7 +16,7 @@ import { mapGetters } from "vuex";
 export default defineComponent({
   name: "DeletedView",
   computed: {
-    ...mapGetters(["itemsToDisplay", "itemsToDeleted"]),
+    ...mapGetters(["itemsToDeleted"]),
   },
 });
 </script>
