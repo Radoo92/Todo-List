@@ -1,21 +1,3 @@
-<template>
-  <div class="navbar">
-    <h1>{{ msg }}</h1>
-    <nav></nav>
-  </div>
-</template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "Hello-World",
-  props: {
-    msg: String,
-  },
-});
-</script>
-
 <style scoped>
 h3 {
   margin: 40px 0 0;

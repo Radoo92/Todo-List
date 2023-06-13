@@ -1,14 +1,16 @@
 <template>
   <div class="container">
     <h1>Todo App</h1>
-    <form action="">
+    <div class="mb-2">
       <input v-model="newItemText" type="text" placeholder="Nová položka" />
-    </form>
+    </div>
     <button class="btn btn-primary" @click="addItem">Pridať</button>
     <ul>
       <li v-for="(item, index) in itemsToDisplay" :key="index">
         {{ item.text }}
-        <button class="btn-delete" @click="deleteItem(item)">Vymazať</button>
+        <button class="btn btn-danger" @click="deleteItem(item)">
+          Vymazať
+        </button>
       </li>
     </ul>
   </div>
@@ -38,13 +40,14 @@ export default defineComponent({
   },
   methods: {
     addItem() {
-      if (this.newItemText) {
-        this.store.commit("addItem", {
-          text: this.newItemText,
-          deleted: false,
-        });
-        this.newItemText = "";
+      if (!this.newItemText) {
+        return;
       }
+      this.store.commit("addItem", {
+        text: this.newItemText,
+        deleted: false,
+      });
+      this.newItemText = "";
     },
     deleteItem(item: TodoItem) {
       this.store.commit("deleteItem", item);
