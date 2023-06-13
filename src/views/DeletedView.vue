@@ -2,7 +2,7 @@
   <div class="deleted">
     <h1>This is an deleted page</h1>
     <ul>
-      <li v-for="(item, index) in itemsToDisplay" :key="index">
+      <li v-for="(item, index) in itemsToDeleted" :key="index">
         {{ item.text }}
       </li>
     </ul>
@@ -11,15 +11,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { TodoItem, key } from "@/store";
-import { useStore } from "vuex";
+import { mapGetters } from "vuex";
 
 export default defineComponent({
   name: "DeletedView",
   computed: {
-    itemsToDisplay() {
-      return useStore(key).state.items.filter((item) => item.deleted);
-    },
+    ...mapGetters(["itemsToDisplay", "itemsToDeleted"]),
   },
 });
 </script>

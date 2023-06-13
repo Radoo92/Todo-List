@@ -1,17 +1,15 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import DeletedView from '../views/DeletedView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: () => import('../views/HomeView.vue')
   },
   {
     path: '/deleted',
     name: 'deleted',
-    component: DeletedView
+    component: () => import('../views/DeletedView.vue')
   }
 ]
 

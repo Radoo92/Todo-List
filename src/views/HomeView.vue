@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <h1>Todo App</h1>
-    <input v-model="newItemText" type="text" placeholder="Nová položka" />
+    <form action="">
+      <input v-model="newItemText" type="text" placeholder="Nová položka" />
+    </form>
     <button class="btn btn-primary" @click="addItem">Pridať</button>
     <ul>
       <li v-for="(item, index) in itemsToDisplay" :key="index">
@@ -16,6 +18,7 @@
 import { defineComponent } from "vue";
 import { TodoItem, key } from "@/store";
 import { useStore } from "vuex";
+import { mapGetters } from "vuex";
 
 export default defineComponent({
   name: "HomeView",
@@ -31,11 +34,7 @@ export default defineComponent({
     };
   },
   computed: {
-    itemsToDisplay() {
-      return useStore(key).state.items.filter(
-        (item: TodoItem) => !item.deleted
-      );
-    },
+    ...mapGetters(["itemsToDisplay", "itemsToDeleted"]),
   },
   methods: {
     addItem() {
