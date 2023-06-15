@@ -1,16 +1,11 @@
 <template>
   <div class="container">
-    <h1>Todo App</h1>
-    <div class="mb-2">
-      <input v-model="newItemText" type="text" placeholder="Nová položka" />
-    </div>
-    <button class="btn btn-primary" @click="addItem">Pridať</button>
+    <input v-model="newItemText" type="text" placeholder="Nová položka" />
+    <button @click="addItem">Pridať</button>
     <ul>
       <li v-for="(item, index) in itemsToDisplay" :key="index">
         {{ item.text }}
-        <button class="btn btn-danger" @click="deleteItem(item)">
-          Vymazať
-        </button>
+        <button @click="deleteItem(item)">Vymazať</button>
       </li>
     </ul>
   </div>

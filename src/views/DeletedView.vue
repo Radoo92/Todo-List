@@ -1,5 +1,5 @@
 <template>
-  <div class="deleted">
+  <div class="container">
     <h1>This is an deleted page</h1>
     <ul>
       <li v-for="(item, index) in itemsToDeleted" :key="index">
