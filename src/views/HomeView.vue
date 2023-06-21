@@ -23,8 +23,6 @@ import { useStore } from "vuex";
 import { mapGetters } from "vuex";
 import TodoItemComponent from "../components/TodoItemComponent.vue";
 
-type TodoDto = { title: string | undefined };
-
 export default defineComponent({
   name: "HomeView",
   components: { TodoItemComponent },
@@ -54,16 +52,14 @@ export default defineComponent({
       this.newItemText = "";
     },
     fetchData() {
-      this.axios
-        .get("https://jsonplaceholder.typicode.com/todos")
-        .then((response) => {
-          response.data.forEach((element: TodoDto) => {
-            this.store.commit("addItem", {
-              text: element.title,
-              deleted: false,
-            });
+      this.axios.get("/todos").then((response) => {
+        response.data.forEach((element: TodoItem) => {
+          this.store.commit("addItem", {
+            text: element.text,
+            deleted: element.deleted,
           });
         });
+      });
     },
   },
 });
@@ -81,6 +77,24 @@ main {
   h1 {
     margin-bottom: 16px;
     text-align: center;
+  }
+
+  input {
+    margin-right: 10px;
+    padding: 5px 20px;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  button {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 5px 20px;
+    text-align: center;
+    font-size: 16px;
+    &:hover {
+      background-color: #dcdcdc;
+    }
   }
 }
 </style>
