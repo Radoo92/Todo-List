@@ -65,6 +65,4 @@ export class Moxios {
 
 		return config
 	}
-
 }
-
