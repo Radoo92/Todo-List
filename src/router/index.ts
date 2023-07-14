@@ -10,6 +10,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/deleted',
     name: 'deleted',
     component: () => import('../views/DeletedView.vue')
+  },
+  {
+    path: '/edit/:id',
+    name: 'edit',
+    component: () => import('../views/EditView.vue')
   }
 ]
 

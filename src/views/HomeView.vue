@@ -23,6 +23,8 @@ import { useStore } from "vuex";
 import { mapGetters } from "vuex";
 import TodoItemComponent from "../components/TodoItemComponent.vue";
 
+type TodoDto = { title: string | undefined; completed: boolean | undefined };
+
 export default defineComponent({
   name: "HomeView",
   components: { TodoItemComponent },
@@ -45,21 +47,43 @@ export default defineComponent({
       if (!this.newItemText) {
         return;
       }
-      this.store.commit("addItem", {
+      const item = {
         text: this.newItemText,
         deleted: false,
-      });
+        id: undefined,
+      };
+
+      this.store.commit("addItem", item);
+      this.postData(item);
       this.newItemText = "";
     },
-    fetchData() {
-      this.axios.get("/todos").then((response) => {
-        response.data.forEach((element: TodoItem) => {
-          this.store.commit("addItem", {
-            text: element.text,
-            deleted: element.deleted,
-          });
+
+    postData(item: TodoItem) {
+      this.axios
+        .post("https://jsonplaceholder.typicode.com/todos", {
+          title: item.text,
+          completed: item.deleted,
+        })
+        .then((response) => {
+          console.log("postni TodoItem, responseCode: ", response.status);
         });
-      });
+    },
+
+    fetchData() {
+      this.axios
+        .get("https://jsonplaceholder.typicode.com/todos")
+        .then((response) => {
+          for (let index = 0; index < response.data.length; index++) {
+            if (index >= 10) {
+              break;
+            }
+            const element = response.data[index] as TodoDto;
+            this.store.commit("addItem", {
+              text: element.title,
+              deleted: element.completed === true,
+            });
+          }
+        });
     },
   },
 });

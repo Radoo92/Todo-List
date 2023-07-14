@@ -4,6 +4,7 @@
     <button v-if="!deletedView" @click="deleteItem(item as TodoItem)">
       Vymazať
     </button>
+    <button @click="routeToEdit(item as TodoItem)">Detail</button>
   </li>
 </template>
 
@@ -25,6 +26,14 @@ export default defineComponent({
     deleteItem(item: TodoItem | undefined) {
       if (item) {
         this.store.commit("deleteItem", item);
+      }
+    },
+    routeToEdit(item: TodoItem | undefined) {
+      if (item) {
+        this.$router.push({
+          name: "edit",
+          params: { id: item.id },
+        });
       }
     },
   },
