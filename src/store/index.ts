@@ -19,10 +19,12 @@ export const store = createStore<State>({
         (item: TodoItem) => !item.deleted
       );
     },
-    getItemById(state: State, id: number) {
-      return state.items.filter(
-        (item: TodoItem) => item.id === id
-      )
+    getItemById(state: State) {
+      return (id: number) => {
+        return state.items.filter(
+          (item: TodoItem) => item.id === id
+        )
+      }
     }
   },
   mutations: {
